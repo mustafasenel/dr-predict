@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 from keras.models import load_model
-model2 = load_model("model-dr-2.h5")
+model2 = load_model("dr/model-dr-2.h5")
 
 
 def crop_image_from_gray(img,tol=7):

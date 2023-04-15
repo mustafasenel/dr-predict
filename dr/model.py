@@ -1,10 +1,8 @@
 import cv2
-import numpy as np
-from io import BytesIO
-from PIL import Image
+
 
 from keras.models import load_model
-model = load_model("model-dr.h5")
+model = load_model("dr/model-dr.h5")
 
 
 def preprocess(img):

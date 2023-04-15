@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import altair as alt
 
-from model import preprocess, crop, model
-from model2 import preprocess2, model2, crop_image_from_gray
+from dr.model import preprocess, crop, model
+from dr.model2 import preprocess2, model2, crop_image_from_gray
 
 st.set_page_config(
     page_title="MBK Vision - DR Prediction",
@@ -17,14 +17,14 @@ st.set_page_config(
 st.header("Diabetic Retinopathy Stages Prediction")
 
 
-col1, col2, col3 = st.columns([3,2,2], gap="large")
+col1, col2, col3 = st.columns([4,3,3], gap="large")
 
 
 with col1:
 
     uploaded_file = st.file_uploader("Upload a retinal photo", type=["png", "jpg", "jpeg"])
     if uploaded_file is not None:
-        col_select, col_button = st.columns([3, 1], gap="large")
+        col_select, col_button = st.columns([3, 1], gap="small")
 
         with col_select:
             selected_model = st.selectbox('Select a Model', ("Resnet50-1", "Resnet50-2"))
@@ -57,7 +57,7 @@ with col1:
                 "predictions":[no_dr,mild,moderate, severe, pdr]
             })
 
-            chart = alt.Chart(chart_data).mark_bar(width=50).encode(
+            chart = alt.Chart(chart_data).mark_bar().encode(
                 x=alt.X("Stages", sort=["None","Mild","Moderate", "Severe", "Proliferative"],
                 axis=alt.Axis(labelAngle=45, labelAlign='left')),
                 y=alt.Y("predictions", title="Predictions (%)"),
@@ -67,6 +67,7 @@ with col1:
                 ))
             ).properties(
                 title="Prediction Results",
+
  
             ).configure_axis(
                 labelFontSize=14,
@@ -94,5 +95,3 @@ with col3:
                 st.image(preprocessed_img, channels="RGB")
 
         
-
-
