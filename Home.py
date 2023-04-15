@@ -12,11 +12,12 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.header("Diabetic Retinopathy Stages Prediction")
+st.title("DEMO APPLICATION")
 
+st.header("📊 Diabetic Retinopathy Stages Prediction ")
+st.header("📈 OCT (Optical Coherence Tomography) Prediction")
 with st.sidebar:
     st.title("MBK Vision - DEMO")
-    st.subheader("Diabetic Retinopathy and")
-    st.subheader("Optical Coherence Tomography Prediction")
+
 
 

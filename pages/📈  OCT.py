@@ -69,7 +69,6 @@ with col1:
 
 with col2:
     if uploaded_file is not None:
-        st.markdown('<div style="text-align:center">Original Image</div>', unsafe_allow_html=True)
         preprocessed_img = crop(opencv_image)
         st.image(preprocessed_img, channels="BGR")
 
