@@ -74,7 +74,11 @@ with col1:
                 titleFontSize=16
             ).configure_title(
                 fontSize=20
-            )
+            ).configure_legend(
+                title="legens",
+                orient='right',
+                padding=10,
+                labelFontSize=14)
             st.altair_chart(chart, use_container_width=True)
 
 with col2:
