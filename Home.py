@@ -25,6 +25,16 @@ st.subheader("🗄️ Datasets")
 
 aptos_image = Image.open("./assets/aptos.png")
 
+#DATASET SECTION
+
+
+dr1 = Image.open("./assets/dr1.jpg")
+dr2 = Image.open("./assets/dr2.jpg")
+dr3 = Image.open("./assets/dr3.jpg")
+dr4 = Image.open("./assets/dr4.jpg")
+
+
+
 st.image(aptos_image)
 st.write("""One of the most widely used machine learning datasets for diabetic retinopathy diagnosis is the APTOS dataset. This dataset consists of 3,435 retinal images obtained from different imaging devices. The images are labeled with five different severity grades of diabetic retinopathy, ranging from 0 (no DR) to 4 (proliferative DR).
 
@@ -33,6 +43,23 @@ Other commonly used datasets for diabetic retinopathy diagnosis include the Kagg
 In conclusion, machine learning models trained on diabetic retinopathy datasets can play a crucial role in early detection and management of this serious eye disease. The APTOS dataset, along with other commonly used datasets, provides a valuable resource for researchers and clinicians working on this important public health issue.
 """
 )
+
+st.subheader("🎚️ Diabetic Retinopathy Stages")
+
+data_col1, data_col2, data_col3, data_col4 = st.columns([1,1,1,1])
+
+with data_col1:
+    st.markdown('<div style="text-align:center">Mild</div>', unsafe_allow_html=True)
+    st.image(dr1)
+with data_col2:
+    st.markdown('<div style="text-align:center">Moderate</div>', unsafe_allow_html=True)
+    st.image(dr2)
+with data_col3:
+    st.markdown('<div style="text-align:center">Severe</div>', unsafe_allow_html=True)
+    st.image(dr3)
+with data_col4:    
+    st.markdown('<div style="text-align:center">Proliferative</div>', unsafe_allow_html=True)
+    st.image(dr4)
 
 st.subheader("📈 Data Preprocessing")
 st.write("""Image data used for diagnosing Diabetic Retinopathy (DR) undergoes pre-processing steps such as improving image quality, removing noise, performing image segmentation, and feature extraction.
@@ -53,7 +80,6 @@ All of these operations are performed to improve image quality and enhance the p
 original_image = Image.open("./assets/original-dr.jpg")
 preprocessed_image = Image.open("./assets/pre-dr.jpg")
 preprocessed_image_2 = Image.open("./assets/pre-dr-2.jpg")
-
 
 image_col_1, image_col_2, image_col_3 = st.columns([1,1,1])
 
@@ -100,12 +126,12 @@ df = pd.DataFrame({
 })
 
 # Add a title to the chart using st.header()
-st.header("Accuracy Chart")
+st.header("📈 Accuracy Chart")
 
 # Plot the history using st.line_chart()
 st.line_chart(df.set_index('Epoch')[['Accuracy', 'Validation Accuracy']])
 # Add a title to the chart using st.header()
-st.header("Loss Chart")
+st.header("📈 Loss Chart")
 
 # Plot the history using st.line_chart()
 st.line_chart(df.set_index('Epoch')[['Loss', 'Validation Loss']])
