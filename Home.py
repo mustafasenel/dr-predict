@@ -107,15 +107,52 @@ In conclusion, the use of ResNet50 architecture, image resizing, and the Keras l
 """
 )
 
+st.title("Model Comparison")
+
 # History pickle dosyasını yükle
-with open('./dr/history.pkl', 'rb') as file:
+with open('./dr/history-1.pkl', 'rb') as file:
     history = pickle.load(file)
+
+#MODEL-2 HISTORY
+with open('./dr/history-2.pkl', 'rb') as file:
+    history_2 = pickle.load(file)
 # Extract accuracy and validation accuracy from history
 acc = history['accuracy']
 val_acc = history['val_accuracy']
 loss = history['loss']
 val_loss = history['val_loss']
 
+# en son epoch'ta accuracy ve loss değerlerini al
+last_epoch = len(history['accuracy'])
+
+# DataFrame oluştur
+data = pd.DataFrame({'last_accuracy': acc[last_epoch-1],
+                     'last_val_accuracy': val_acc[last_epoch-1],
+                     'last_loss': loss[last_epoch-1],
+                     'last_val_loss': val_loss[last_epoch-1]}, index=['model-1'])
+
+
+###################################### MODEL - 2#############################
+# Extract accuracy and validation accuracy from history
+acc_2 = history_2['accuracy']
+val_acc_2 = history_2['val_accuracy']
+loss_2 = history_2['loss']
+val_loss_2 = history_2['val_loss']
+
+# en son epoch'ta accuracy ve loss değerlerini al
+last_epoch = len(history_2['accuracy'])
+
+# DataFrame oluştur
+data_2 = pd.DataFrame({'last_accuracy': acc_2[last_epoch-1],
+                     'last_val_accuracy': val_acc_2[last_epoch-1],
+                     'last_loss': loss_2[last_epoch-1],
+                     'last_val_loss': val_loss_2[last_epoch-1]}, index=['model-2'])
+
+# İki DataFrame'i birleştirme
+result = pd.concat([data, data_2])
+
+# CSS to inject contained in a string
+st.dataframe(result, use_container_width=True)
 
 df = pd.DataFrame({
     'Epoch': range(1, len(acc)+1),
@@ -125,16 +162,58 @@ df = pd.DataFrame({
     'Validation Loss': val_loss
 })
 
-# Add a title to the chart using st.header()
-st.header("📈 Accuracy Chart")
+# MODEL -1 HISTORY
 
-# Plot the history using st.line_chart()
-st.line_chart(df.set_index('Epoch')[['Accuracy', 'Validation Accuracy']])
-# Add a title to the chart using st.header()
-st.header("📈 Loss Chart")
+st.title("Model-1 History")
 
-# Plot the history using st.line_chart()
-st.line_chart(df.set_index('Epoch')[['Loss', 'Validation Loss']])
+chart_col_1, chart_col_2 = st.columns([1,1], gap="medium")
+
+with chart_col_1:
+    # Add a title to the chart using st.header()
+    st.header("📈 Accuracy Chart")
+
+    # Plot the history using st.line_chart()
+    st.line_chart(df.set_index('Epoch')[['Accuracy', 'Validation Accuracy']])
+with chart_col_2:
+    st.header("📈 Loss Chart")
+
+    # Plot the history using st.line_chart()
+    st.line_chart(df.set_index('Epoch')[['Loss', 'Validation Loss']])
+
+
+#MODEL-2 HISTORY
+st.title("Model-2 History")
+
+df_2 = pd.DataFrame({
+    'Epoch': range(1, len(acc_2)+1),
+    'Accuracy': acc_2,
+    'Validation Accuracy': val_acc_2,
+    'Loss': loss_2,
+    'Validation Loss': val_loss_2
+})
+
+chart_col_1, chart_col_2 = st.columns([1,1], gap="medium")
+
+with chart_col_1:
+
+
+    # Add a title to the chart using st.header()
+    st.header("📈 Accuracy Chart")
+
+    # Plot the history using st.line_chart()
+    st.line_chart(df_2.set_index('Epoch')[['Accuracy', 'Validation Accuracy']])
+
+with chart_col_2:
+    # Add a title to the chart using st.header()
+    st.header("📈 Loss Chart")
+
+    # Plot the history using st.line_chart()
+    st.line_chart(df_2.set_index('Epoch')[['Loss', 'Validation Loss']])
+
+
+
+
+
 
 
 
